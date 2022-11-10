@@ -8,10 +8,15 @@ name = "pypi"
 [dev-packages]
 build = "*"
 sphinx = "*"
+mypy = "*"
+flake8 = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.10"
 
 [scripts]
 build = "python -m build"
+flake8 = "flake8"
+mypy = "mypy mypackage"
 doc = "sphinx-build -b html docs docs/_build"

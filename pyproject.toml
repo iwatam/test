@@ -20,3 +20,6 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/iwatam/test"
 "Bug Tracker" = "https://github.com/iwatam/test/issues"
+
+[tool.mypy]
+check_untyped_defs = true

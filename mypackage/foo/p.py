@@ -1,2 +1,3 @@
 class P:
-    pass
+    def f(self):
+        i: int = "foo"
