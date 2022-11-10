@@ -30,13 +30,21 @@ jobs:
         pipenv install --dev
     - name: Lint with flake8
       run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        pipenv run flake8
+        pipenv run mypy
     - name: Test with pytest
       run: |
         pytest
     - name: doc generation
       run: |
         pipenv run doc
+    - name: Push new docs
+        run: |
+          git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          if (git diff --shortstat | grep '[0-9]'); then \
+            git add .; \
+            git commit -m "Generating docs via GitHub Actions"; \
+            git push origin HEAD:${GITHUB_REF}; \
+          fi
