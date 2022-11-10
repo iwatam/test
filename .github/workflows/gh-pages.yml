@@ -43,7 +43,8 @@ jobs:
           pipenv run doc
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
-        path: "docs/_build"
+        with:
+          path: "docs/_build"
 
   # Deployment job
   deploy:
